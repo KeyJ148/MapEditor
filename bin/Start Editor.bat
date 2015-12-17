@@ -1,2 +1,0 @@
-java core/MapEditor
-pause

@@ -1,4 +1,4 @@
-package core;
+package graphics;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -10,6 +10,7 @@ public class FrameMain extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private static final String FRAME_NAME = "MapEditor";
+	private PanelMain panelMain;
 	
 	public FrameMain(){
 		super(FRAME_NAME);
@@ -25,13 +26,16 @@ public class FrameMain extends JFrame{
 		
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		
-		PanelMain panelMain = new PanelMain();
-		panelMain.setLayout(new BorderLayout());
+		panelMain = new PanelMain();
 		add(panelMain, BorderLayout.CENTER);
 		
 		setJMenuBar(new MenuBarMain(this));
 		
 		setVisible(true);
+	}
+	
+	public PanelMain getPanelMain(){
+		return panelMain;
 	}
 	
 }

@@ -1,4 +1,6 @@
-package core;
+package logic;
+
+import graphics.FrameMain;
 
 public class MapEditor {
 
