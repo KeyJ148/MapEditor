@@ -17,14 +17,11 @@ import logic.Storage;
 public class MenuBarMain extends JMenuBar implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
-	private FrameMain frameMain;
 	private JMenu menuFile, menuSettings;
 	private JMenuItem itemFileOpen, itemFileSave, itemFileSaveAs;
 	private JMenuItem itemSettingsLoadSprite;
 	
-	public MenuBarMain(FrameMain frameMain){
-		this.frameMain = frameMain;
-		
+	public MenuBarMain(){
 		//װאיכû
 		menuFile = new JMenu("File");
 		add(menuFile);
@@ -64,7 +61,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 	public void actionFileOpen(){
 		JFileChooser fileOpen = new JFileChooser();
 		fileOpen.setCurrentDirectory(new File("."));
-		if (fileOpen.showOpenDialog(frameMain) == JFileChooser.APPROVE_OPTION){
+		if (fileOpen.showOpenDialog(FrameMain.getInstance()) == JFileChooser.APPROVE_OPTION){
 			File file = fileOpen.getSelectedFile();
 			new Map(file);
 		}
@@ -77,7 +74,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 	private void actionFileSaveAs(){
 		JFileChooser fileSaveAs = new JFileChooser();
 		fileSaveAs.setCurrentDirectory(new File("."));
-		if (fileSaveAs.showSaveDialog(frameMain) == JFileChooser.APPROVE_OPTION){
+		if (fileSaveAs.showSaveDialog(FrameMain.getInstance()) == JFileChooser.APPROVE_OPTION){
 			File file = fileSaveAs.getSelectedFile();
 		}
 	}
@@ -86,11 +83,10 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 		JFileChooser fileOpen = new JFileChooser();
 		fileOpen.setCurrentDirectory(new File("."));
 		fileOpen.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-		if (fileOpen.showOpenDialog(frameMain) == JFileChooser.APPROVE_OPTION){
+		if (fileOpen.showOpenDialog(FrameMain.getInstance()) == JFileChooser.APPROVE_OPTION){
 			File file = fileOpen.getSelectedFile();
 			Storage.loadSprites(file);
-			frameMain.getPanelMain().getPanelTree().addSprite(Storage.getSprite());
-			frameMain.getPanelMain().getPanelTree().repaint();
+			FrameMain.getInstance().getPanelMain().getPanelTree().addSprite(Storage.getSprite());
 		}
 	}
 

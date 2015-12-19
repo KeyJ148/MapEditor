@@ -20,6 +20,7 @@ public class PanelMain extends JPanel{
 		add(panelTree, BorderLayout.WEST);
 		JScrollPane scrollPane = new JScrollPane(panelTree);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		scrollPane.getVerticalScrollBar().setUnitIncrement(32);
 		add(scrollPane, BorderLayout.WEST);
 		
 		JPanel panelMap = new JPanel();

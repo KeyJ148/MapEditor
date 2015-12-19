@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 public class FrameMain extends JFrame{
 
 	private static final long serialVersionUID = 1L;
+	private static FrameMain instance = null;
 	private static final String FRAME_NAME = "MapEditor";
 	private PanelMain panelMain;
 	
@@ -29,13 +30,18 @@ public class FrameMain extends JFrame{
 		panelMain = new PanelMain();
 		add(panelMain, BorderLayout.CENTER);
 		
-		setJMenuBar(new MenuBarMain(this));
+		setJMenuBar(new MenuBarMain());
 		
 		setVisible(true);
 	}
 	
 	public PanelMain getPanelMain(){
 		return panelMain;
+	}
+	
+	public static FrameMain getInstance(){
+		if (instance == null) instance = new FrameMain();
+		return instance;
 	}
 	
 }
