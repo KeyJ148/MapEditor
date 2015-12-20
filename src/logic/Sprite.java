@@ -46,6 +46,7 @@ public class Sprite{
     }
     
     public void draw(Graphics2D g, int x, int y, double direction) {
+    	direction = Math.toRadians(direction);
     	direction-=Math.PI/2; //смещена начального угла с Востока на Север
 		AffineTransform at = new AffineTransform(); 
 		at.rotate(-direction,x+getWidth()/2,y+getHeight()/2); //Создание трансформа с поворотом

@@ -18,13 +18,18 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JMenu menuFile, menuSettings;
-	private JMenuItem itemFileOpen, itemFileSave, itemFileSaveAs;
-	private JMenuItem itemSettingsLoadSprite;
+	private JMenuItem itemFileCreate, itemFileOpen, itemFileSave, itemFileSaveAs;
+	private JMenuItem itemSettingsLoadSprite, itemSettingsSetBackground;
 	
 	public MenuBarMain(){
 		//Файлы
 		menuFile = new JMenu("File");
 		add(menuFile);
+		
+		itemFileCreate = new JMenuItem("Create", new ImageIcon("image/create.png"));
+		itemFileCreate.addActionListener(this);
+		itemFileCreate.setMnemonic(KeyEvent.VK_N);
+		menuFile.add(itemFileCreate);
 		
 		itemFileOpen = new JMenuItem("Open", new ImageIcon("image/open.png"));
 		itemFileOpen.addActionListener(this);
@@ -46,16 +51,27 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 		
 		itemSettingsLoadSprite = new JMenuItem("Load sprites", new ImageIcon("image/load_sprite.png"));
 		itemSettingsLoadSprite.addActionListener(this);
-		itemSettingsLoadSprite.setMnemonic(KeyEvent.VK_S);
+		itemSettingsLoadSprite.setMnemonic(KeyEvent.VK_L);
 		menuSettings.add(itemSettingsLoadSprite);
+		
+		itemSettingsSetBackground = new JMenuItem("Set background", new ImageIcon("image/set_background.png"));
+		itemSettingsSetBackground.addActionListener(this);
+		itemSettingsSetBackground.setMnemonic(KeyEvent.VK_B);
+		menuSettings.add(itemSettingsSetBackground);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		if (e.getSource().equals(itemFileCreate)) actionFileCreate();
 		if (e.getSource().equals(itemFileOpen)) actionFileOpen();
 		if (e.getSource().equals(itemFileSave)) actionFileSave();
 		if (e.getSource().equals(itemFileSaveAs)) actionFileSaveAs();
 		if (e.getSource().equals(itemSettingsLoadSprite)) actionSettingsLoadSprite();
+		if (e.getSource().equals(itemSettingsSetBackground)) actionSettingsSetBackground();
+	}
+	
+	public void actionFileCreate(){
+		new Map();
 	}
 	
 	public void actionFileOpen(){
@@ -67,11 +83,11 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 		}
 	}
 	
-	private void actionFileSave(){
+	private void actionFileSave(){//Не доделано
 		
 	}
 	
-	private void actionFileSaveAs(){
+	private void actionFileSaveAs(){//Не доделано
 		JFileChooser fileSaveAs = new JFileChooser();
 		fileSaveAs.setCurrentDirectory(new File("."));
 		if (fileSaveAs.showSaveDialog(FrameMain.getInstance()) == JFileChooser.APPROVE_OPTION){
@@ -87,6 +103,18 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 			File file = fileOpen.getSelectedFile();
 			Storage.loadSprites(file);
 			FrameMain.getInstance().getPanelMain().getPanelTree().addSprite(Storage.getSprite());
+		}
+	}
+	
+	private void actionSettingsSetBackground(){
+		JFileChooser fileOpen = new JFileChooser();
+		fileOpen.setCurrentDirectory(new File("."));
+		if (fileOpen.showOpenDialog(FrameMain.getInstance()) == JFileChooser.APPROVE_OPTION){
+			File file = fileOpen.getSelectedFile();
+			if (FrameMain.getInstance().getPanelMain().getPanelMap().getMap() != null){
+				FrameMain.getInstance().getPanelMain().getPanelMap().getMap().setBackground(file);
+				FrameMain.getInstance().getPanelMain().getPanelMap().repaint();
+			}
 		}
 	}
 

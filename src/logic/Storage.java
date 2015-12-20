@@ -10,7 +10,7 @@ public class Storage {
 	public static void add(File f){
 		String name = f.getName().substring(0, f.getName().lastIndexOf('.'));
 		String type = f.getName().substring(f.getName().lastIndexOf('.')+1);
-		if ((type.equals("png")) || (type.equals("jpeg"))){
+		if (type.equals("png")){
 			boolean haveName = false;
 			for (int i=0; i<spriteArray.size(); i++){
 				if (name.equals(spriteArray.get(i).getName())){
@@ -40,6 +40,8 @@ public class Storage {
 	public static Sprite getSprite(String name){
 		for (int i=0; i<spriteArray.size(); i++){
 			if (name.equals(spriteArray.get(i).getName())) return spriteArray.get(i);
+			String spriteShortName = spriteArray.get(i).getName().substring(0, spriteArray.get(i).getName().lastIndexOf('.'));
+			if (name.equals(spriteShortName)) return spriteArray.get(i);
 		}
 		return null;
 	}

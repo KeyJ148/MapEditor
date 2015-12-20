@@ -8,12 +8,14 @@ import javax.swing.JScrollPane;
 public class PanelMain extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	private PanelControl panelControl;
 	private PanelTree panelTree;
+	private PanelMap panelMap;
 	
 	public PanelMain(){
 		setLayout(new BorderLayout());
 		
-		PanelControl panelControl = new PanelControl();
+		panelControl = new PanelControl();
 		add(panelControl, BorderLayout.NORTH);
 		
 		panelTree = new PanelTree();
@@ -23,13 +25,22 @@ public class PanelMain extends JPanel{
 		scrollPane.getVerticalScrollBar().setUnitIncrement(32);
 		add(scrollPane, BorderLayout.WEST);
 		
-		JPanel panelMap = new JPanel();
-		panelMap.setLayout(new BorderLayout());
-		panelMap.add(new PanelMap(), BorderLayout.CENTER);
-		add(panelMap, BorderLayout.CENTER);
+		JPanel panelMapOut = new JPanel();
+		panelMapOut.setLayout(new BorderLayout());
+		panelMap = new PanelMap();
+		panelMapOut.add(panelMap, BorderLayout.CENTER);
+		add(panelMapOut, BorderLayout.CENTER);
+	}
+	
+	public PanelControl getPanelControl() {
+		return panelControl;
 	}
 	
 	public PanelTree getPanelTree(){
 		return panelTree;
+	}
+	
+	public PanelMap getPanelMap() {
+		return panelMap;
 	}
 }
