@@ -13,7 +13,7 @@ public class FrameMain extends JFrame{
 	private static final String FRAME_NAME = "MapEditor";
 	private PanelMain panelMain;
 	
-	public FrameMain(){
+	private FrameMain(){
 		super(FRAME_NAME);
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

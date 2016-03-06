@@ -70,6 +70,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 		if (e.getSource().equals(itemSettingsSetBackground)) actionSettingsSetBackground();
 	}
 	
+	//Файлы
 	public void actionFileCreate(){
 		new Map();
 	}
@@ -95,6 +96,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 		}
 	}
 	
+	//Настройки
 	private void actionSettingsLoadSprite(){
 		JFileChooser fileOpen = new JFileChooser();
 		fileOpen.setCurrentDirectory(new File("."));

@@ -1,5 +1,5 @@
 #!/bin/bash
-java logic/MapEditor
+java -classpath ./bin logic/MapEditor
 SETTINGS=`stty -g` 
 stty -echo 
 read -n 1 

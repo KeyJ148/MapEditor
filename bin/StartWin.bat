@@ -1,2 +1,0 @@
-java logic/MapEditor
-pause
