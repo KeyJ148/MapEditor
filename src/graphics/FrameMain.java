@@ -6,6 +6,8 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
+import graphics.control.MenuBarMain;
+
 public class FrameMain extends JFrame{
 
 	private static final long serialVersionUID = 1L;

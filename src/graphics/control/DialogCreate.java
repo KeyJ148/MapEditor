@@ -1,4 +1,4 @@
-package graphics;
+package graphics.control;
 
 import java.awt.Dimension;
 import java.awt.Font;

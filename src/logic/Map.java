@@ -7,8 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import graphics.DialogCreate;
 import graphics.FrameMain;
+import graphics.control.DialogCreate;
 
 public class Map {
 	

@@ -5,6 +5,10 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import graphics.control.PanelControl;
+import graphics.map.PanelMap;
+import graphics.tree.PanelTree;
+
 public class PanelMain extends JPanel{
 
 	private static final long serialVersionUID = 1L;
