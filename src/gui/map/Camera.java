@@ -1,4 +1,4 @@
-package graphics.map;
+package gui.map;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -7,12 +7,12 @@ import java.awt.event.MouseMotionListener;
 import logic.Map;
 import logic.Sprite;
 
-public class Camera implements MouseMotionListener {
+public class Camera implements MouseMotionListener{
 
 	private PanelMap panelMap;
 	
-	private int mouseXPre, mouseYPre;//Позиция мыши в предыдущей итерации (Для Drag)
-	private int cameraX, cameraY;//Позиция левого верхнего угла видимой области на оси PanelMap
+	private int mouseXPre, mouseYPre;
+	private int cameraX, cameraY;
 	
 	public Camera(PanelMap panelMap){
 		this.panelMap = panelMap;
@@ -21,10 +21,9 @@ public class Camera implements MouseMotionListener {
 	}
 	
 	public void paintMap(Graphics2D g2D, Map map){
-		//заливка фона
 		Sprite background = map.getBackground();
 		if (background != null){
-			int size = background.getWidth();//Размер плитки с фоном
+			int size = background.getWidth();
 			for (int dy = 0; dy<=map.getHeight(); dy+=size){
 				for (int dx = 0; dx<=map.getWidth(); dx+=size){
 					background.draw(g2D, cameraX+dx, cameraY+dy, 90);
@@ -32,7 +31,7 @@ public class Camera implements MouseMotionListener {
 			}
 		}
 			
-		//Отрисовка объектов	
+			
 		for (int i=0; i<map.getCount(); i++){
 			map.getSprite(i).draw(g2D, cameraX+map.getX(i), cameraY+map.getY(i), map.getDirection(i));
 		}
@@ -58,5 +57,13 @@ public class Camera implements MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		mouseXPre = e.getX();
 		mouseYPre = e.getY();
+	}
+	
+	public int getCameraX(){
+		return cameraX;
+	}
+	
+	public int getCameraY(){
+		return cameraY;
 	}
 }

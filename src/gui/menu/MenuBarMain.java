@@ -1,4 +1,4 @@
-package graphics.control;
+package gui.menu;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +11,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import graphics.FrameMain;
+import gui.FrameMain;
 import logic.Map;
 import logic.Storage;
 
@@ -73,7 +73,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 	
 	//װאיכû
 	public void actionFileCreate(){
-		new Map();
+		new DialogCreate(FrameMain.getInstance());
 	}
 	
 	public void actionFileOpen(){

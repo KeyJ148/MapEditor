@@ -7,8 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import graphics.FrameMain;
-import graphics.control.DialogCreate;
+import gui.FrameMain;
 
 public class Map {
 	
@@ -47,11 +46,7 @@ public class Map {
 		}
 	}
 	
-	public Map(){
-		new DialogCreate(FrameMain.getInstance(), this);
-	}
-	
-	public void continuedCreate(int width, int height){
+	public Map(int width, int height){
 		setSize(width, height);
 		setThisAsMap();
 	}

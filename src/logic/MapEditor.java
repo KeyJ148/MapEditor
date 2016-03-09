@@ -1,6 +1,6 @@
 package logic;
 
-import graphics.FrameMain;
+import gui.FrameMain;
 
 public class MapEditor {
 

@@ -1,4 +1,4 @@
-package graphics.control;
+package gui.control;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,8 +35,8 @@ public class PanelControl extends JPanel implements ActionListener {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		g.setColor(Color.BLACK);
-		g.drawRect(0, 0, getWidth(), getHeight());
+		g.setColor(new Color(122, 138, 153));
+		g.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}
 
 	@Override

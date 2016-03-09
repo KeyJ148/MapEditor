@@ -1,4 +1,4 @@
-package graphics.map;
+package gui.map;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -14,10 +14,14 @@ public class PanelMap extends JPanel{
 	
 	private Map map;
 	private Camera camera;
+	private ObjectCreator creator;
 	
 	public PanelMap(){
 		camera = new Camera(this);
 		addMouseMotionListener(camera);
+		
+		creator = new ObjectCreator(this);
+		addMouseListener(creator);
 	}
 	
 	@Override
@@ -33,7 +37,7 @@ public class PanelMap extends JPanel{
 			camera.paintMap(g2D, map);
 		}
 		
-		g2D.setColor(Color.BLACK);
+		g2D.setColor(new Color(122, 138, 153));
 		g2D.drawRect(0, 0, getWidth()-1, getHeight()-1);
 	}
 	
@@ -49,5 +53,9 @@ public class PanelMap extends JPanel{
 	
 	public Map getMap(){
 		return map;
+	}
+	
+	public Camera getCamera(){
+		return camera;
 	}
 }

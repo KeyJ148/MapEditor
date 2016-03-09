@@ -1,4 +1,4 @@
-package graphics.control;
+package gui.menu;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -20,14 +20,12 @@ public class DialogCreate extends JDialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private static final String NAME = "Create";
 	
-	private Map map;
 	private JLabel lblWidth, lblHeight;
 	private JTextField tfWidth, tfHeight;
 	private JButton buttonCreate;
 
-	public DialogCreate(JFrame frame, Map map){
+	public DialogCreate(JFrame frame){
 		super(frame, NAME, true);
-		this.map = map;
 		
 		setResizable(false);
 		
@@ -78,7 +76,7 @@ public class DialogCreate extends JDialog implements ActionListener {
 	}
 	
 	private void actionCreate(){
-		map.continuedCreate(Integer.parseInt(tfWidth.getText()), Integer.parseInt(tfHeight.getText()));
+		new Map(Integer.parseInt(tfWidth.getText()), Integer.parseInt(tfHeight.getText()));
 		dispose();
 	}
 	

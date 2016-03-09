@@ -1,13 +1,13 @@
-package graphics;
+package gui;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-import graphics.control.PanelControl;
-import graphics.map.PanelMap;
-import graphics.tree.PanelTree;
+import gui.control.PanelControl;
+import gui.map.PanelMap;
+import gui.tree.PanelTree;
 
 public class PanelMain extends JPanel{
 

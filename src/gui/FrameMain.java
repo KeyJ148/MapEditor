@@ -1,4 +1,4 @@
-package graphics;
+package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 
-import graphics.control.MenuBarMain;
+import gui.menu.MenuBarMain;
 
 public class FrameMain extends JFrame{
 
