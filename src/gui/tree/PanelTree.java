@@ -14,7 +14,7 @@ public class PanelTree extends JPanel {
 	private static final int SPRITE_SPACE = 1;
 	private static final int SPRITE_IN_LINE = 2;
 	
-	private Sprite spriteSelect;
+	private SpriteButton spriteButtonSelect;
 	
 	public PanelTree(){
 		setPreferredSize(new Dimension(SPRITE_SIZE*SPRITE_IN_LINE+SPRITE_SPACE*2, getHeight()));
@@ -32,12 +32,14 @@ public class PanelTree extends JPanel {
 			addSprite(sprite[i]);
 	}
 	
-	public void setSpriteSelect(Sprite spriteSelect){
-		this.spriteSelect = spriteSelect;
+	public void setSpriteSelect(SpriteButton spriteButtonSelect){
+		if (this.spriteButtonSelect != null) this.spriteButtonSelect.setEnabled(true);
+		
+		this.spriteButtonSelect = spriteButtonSelect;
+		this.spriteButtonSelect.setEnabled(false);
 	}
 	
-	public Sprite getSpriteSelect() throws NullPointerException{
-		if (spriteSelect == null) throw new NullPointerException();
-		return spriteSelect;
+	public Sprite getSpriteSelect(){
+		return spriteButtonSelect.getSprite();
 	}
 }

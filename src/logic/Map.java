@@ -1,9 +1,11 @@
 package logic;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -21,8 +23,12 @@ public class Map {
 	private ArrayList<Double> directionArray = new ArrayList<Double>();
 	private ArrayList<Sprite> spriteArray = new ArrayList<Sprite>();
 	
+	private File dataFile;//Файл, из которого открыли карту
+	
 	public Map(File f){
 		try {
+			dataFile = f;
+			
 			BufferedReader reader = new BufferedReader(new FileReader(f));
 			String[] words = reader.readLine().split(" ");
 			width = Integer.parseInt(words[0]);
@@ -53,6 +59,25 @@ public class Map {
 	
 	private void setThisAsMap(){
 		FrameMain.getInstance().getPanelMain().getPanelMap().setMap(this);
+	}
+	
+	public void save(){
+		save(dataFile);
+	}
+	
+	public void save(File f){
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(f));
+			writer.write(width + " " + height + " " + backgroundSprite.getName());
+			writer.newLine();
+			for (int i=0; i<getCount(); i++){
+				writer.write(getX(i) + " " + getY(i) + " " + getDirection(i) + " " + getSprite(i).getName());
+				writer.newLine();
+			}
+			writer.close();
+		} catch (IOException e) {
+			System.out.println("[ERROR] IO exception");
+		}
 	}
 	
 	public void add(int x, int y, double direction, Sprite sprite){
@@ -111,7 +136,7 @@ public class Map {
 		return spriteArray.get(index);
 	}
 	
-	public void delete(int index){
+	public void remove(int index){
 		xArray.remove(index);
 		yArray.remove(index);
 		directionArray.remove(index);

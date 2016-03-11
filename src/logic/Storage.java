@@ -13,7 +13,7 @@ public class Storage {
 		if (type.equals("png")){
 			boolean haveName = false;
 			for (int i=0; i<spriteArray.size(); i++){
-				if (name.equals(spriteArray.get(i).getName())){
+				if (name.equals(spriteArray.get(i).getPath())){
 					haveName = true;
 					break;
 				}
@@ -39,9 +39,8 @@ public class Storage {
 	//ѕолучение ссылки на спрайт из строки
 	public static Sprite getSprite(String name){
 		for (int i=0; i<spriteArray.size(); i++){
+			if (name.equals(spriteArray.get(i).getPath())) return spriteArray.get(i);
 			if (name.equals(spriteArray.get(i).getName())) return spriteArray.get(i);
-			String spriteShortName = spriteArray.get(i).getName().substring(0, spriteArray.get(i).getName().lastIndexOf('.'));
-			if (name.equals(spriteShortName)) return spriteArray.get(i);
 		}
 		return null;
 	}

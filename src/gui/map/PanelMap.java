@@ -14,14 +14,14 @@ public class PanelMap extends JPanel{
 	
 	private Map map;
 	private Camera camera;
-	private ObjectCreator creator;
+	private ObjectHandler objHandler;
 	
 	public PanelMap(){
 		camera = new Camera(this);
 		addMouseMotionListener(camera);
 		
-		creator = new ObjectCreator(this);
-		addMouseListener(creator);
+		objHandler = new ObjectHandler(this);
+		addMouseListener(objHandler);
 	}
 	
 	@Override

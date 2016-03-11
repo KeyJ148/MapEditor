@@ -14,10 +14,10 @@ import javax.imageio.ImageIO;
 public class Sprite{
 	
     private Image image;
-    private String name;
+    private String path;
     
     public Sprite(File f) {
-    	name = f.getName();
+    	path = f.getName();
 		//Загрузка изображения
 		BufferedImage sourceImage = null;
         try {
@@ -41,8 +41,12 @@ public class Sprite{
     	return image;
 	}
     
+    public String getPath(){
+    	return path;
+    }
+    
     public String getName(){
-    	return name;
+    	return getPath().substring(0, getPath().lastIndexOf('.'));
     }
     
     public void draw(Graphics2D g, int x, int y, double direction) {

@@ -25,7 +25,10 @@ public class SpriteButton extends JButton implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		panelTree.setSpriteSelect(sprite);
+		panelTree.setSpriteSelect(this);
 	}
 	
+	public Sprite getSprite(){
+		return sprite;
+	}
 }

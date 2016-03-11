@@ -86,14 +86,14 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 	}
 	
 	private void actionFileSave(){//Не доделано
-		
+		FrameMain.getInstance().getPanelMain().getPanelMap().getMap().save();
 	}
 	
 	private void actionFileSaveAs(){//Не доделано
 		JFileChooser fileSaveAs = new JFileChooser();
 		fileSaveAs.setCurrentDirectory(new File("."));
 		if (fileSaveAs.showSaveDialog(FrameMain.getInstance()) == JFileChooser.APPROVE_OPTION){
-			File file = fileSaveAs.getSelectedFile();
+			FrameMain.getInstance().getPanelMain().getPanelMap().getMap().save(fileSaveAs.getSelectedFile());
 		}
 	}
 	
