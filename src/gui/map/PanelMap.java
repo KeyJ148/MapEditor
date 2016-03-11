@@ -15,6 +15,7 @@ public class PanelMap extends JPanel{
 	private Map map;
 	private Camera camera;
 	private ObjectHandler objHandler;
+	private Grid grid;
 	
 	public PanelMap(){
 		camera = new Camera(this);
@@ -22,6 +23,9 @@ public class PanelMap extends JPanel{
 		
 		objHandler = new ObjectHandler(this);
 		addMouseListener(objHandler);
+		addMouseWheelListener(objHandler);
+		
+		grid = new Grid(this);
 	}
 	
 	@Override
@@ -55,7 +59,15 @@ public class PanelMap extends JPanel{
 		return map;
 	}
 	
+	public ObjectHandler getObjHandler(){
+		return objHandler;
+	}
+	
 	public Camera getCamera(){
 		return camera;
+	}
+	
+	public Grid getGrid(){
+		return grid;
 	}
 }

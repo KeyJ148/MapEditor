@@ -3,55 +3,86 @@ package gui.map;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 import gui.FrameMain;
 import logic.Map;
 import logic.Sprite;
 
-public class ObjectHandler implements MouseListener {
+public class ObjectHandler implements MouseListener, MouseWheelListener {
 	
 	private PanelMap panelMap;
+	private double direction = 90;//Угол, с которым будет установлен объект
+	private static final double DIRECTION_UP = (double) 360/16;//На сколько градусов поворачивать за один скролл
 	
 	public ObjectHandler(PanelMap panelMap){
 		this.panelMap = panelMap;
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent e) {
+	public void mousePressed(MouseEvent e) {
 		Map map = panelMap.getMap();
 		int absoluteX = e.getX()-panelMap.getCamera().getCameraX();
 		int absoluteY = e.getY()-panelMap.getCamera().getCameraY();
 		
 		if (e.getModifiers() == InputEvent.BUTTON1_MASK){
-			Sprite spriteSelect = FrameMain.getInstance().getPanelMain().getPanelTree().getSpriteSelect();
-			if (spriteSelect == null){
-				System.out.println("Object not selected");
-				return;
-			}
+			addObject(map, absoluteX, absoluteY);
+		}
 			
-			if (absoluteX < map.getWidth() && absoluteY < map.getHeight()){
-				map.add(absoluteX, absoluteY, 90, spriteSelect);
-				panelMap.repaint();
-			}
+		if (e.getModifiers() == InputEvent.BUTTON3_MASK){
+			removeObject(map, absoluteX, absoluteY);
+		}
+	}
+	
+	private void addObject(Map map, int absoluteX, int absoluteY){
+		Sprite spriteSelect;
+		if (FrameMain.getInstance().getPanelMain().getPanelTree().isSelect()){
+			spriteSelect = FrameMain.getInstance().getPanelMain().getPanelTree().getSpriteSelect();
+		} else{
+			System.out.println("Object not selected");
+			return;
 		}
 		
-		if (e.getModifiers() == InputEvent.BUTTON3_MASK){
-			for (int i=0; i<map.getCount(); i++){
-				if ((absoluteX >= map.getX(i)) &&
-					(absoluteY >= map.getY(i)) &&
-					(absoluteX <= map.getX(i)+map.getSprite(i).getWidth()) &&
-					(absoluteY <= map.getY(i)+map.getSprite(i).getHeight())){
-					
-					map.remove(i);
-					panelMap.repaint();
-					break;
-				}
+		if (absoluteX < map.getWidth() && absoluteY < map.getHeight()){
+			Grid grid = panelMap.getGrid();
+			if (grid.getActive()){
+				map.add(grid.getObjX(absoluteX), grid.getObjY(absoluteY), direction, spriteSelect);
+			} else {
+				map.add(absoluteX, absoluteY, direction, spriteSelect);
+			}
+			panelMap.repaint();
+		}
+	}
+	
+	private void removeObject(Map map, int absoluteX, int absoluteY){
+		if (map == null){
+			System.out.println("Map not selected");
+			return;
+		}
+		
+		for (int i=map.getCount()-1; i>=0; i--){//Обратный цикл для того чтобы вначале удалялись объекты расположенные сверху
+			if ((absoluteX >= map.getX(i)-map.getSprite(i).getWidth()/2) &&
+				(absoluteY >= map.getY(i)-map.getSprite(i).getHeight()/2) &&
+				(absoluteX <= map.getX(i)+map.getSprite(i).getWidth()/2) &&
+				(absoluteY <= map.getY(i)+map.getSprite(i).getHeight()/2)){
+				
+				map.remove(i);
+				panelMap.repaint();
+				break;
 			}
 		}
 	}
+	
+	@Override
+	public void mouseWheelMoved(MouseWheelEvent e) {
+		int notches = e.getWheelRotation();
+		direction += DIRECTION_UP*(-notches);//notches<0  => Скролл вверх, иначе вниз
+		panelMap.repaint();
+	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {}
@@ -61,5 +92,9 @@ public class ObjectHandler implements MouseListener {
 
 	@Override
 	public void mouseExited(MouseEvent e) {}
+	
+	public double getDirection(){
+		return direction;
+	}
 
 }

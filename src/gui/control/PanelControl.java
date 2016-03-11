@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import gui.FrameMain;
+
 public class PanelControl extends JPanel implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
@@ -46,7 +48,7 @@ public class PanelControl extends JPanel implements ActionListener {
 	}
 
 	private void actionButton1() {
-		System.out.println("Button 1!");
+		FrameMain.getInstance().getPanelMain().getPanelMap().getGrid().turn();
 	}
 
 	private void actionButton2() {

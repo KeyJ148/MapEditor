@@ -1,9 +1,12 @@
 package gui.map;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 
+import gui.FrameMain;
 import logic.Map;
 import logic.Sprite;
 
@@ -35,6 +38,22 @@ public class Camera implements MouseMotionListener{
 		for (int i=0; i<map.getCount(); i++){
 			map.getSprite(i).draw(g2D, cameraX+map.getX(i), cameraY+map.getY(i), map.getDirection(i));
 		}
+		
+		if (panelMap.getGrid().getActive()){
+			g2D.setColor(Color.BLACK);
+			for (int i=0; i<map.getWidth(); i+=panelMap.getGrid().getWidth()){
+				g2D.drawLine(cameraX+i, cameraY, cameraX+i, cameraY+map.getHeight());
+			}
+			for (int i=0; i<map.getHeight(); i+=panelMap.getGrid().getHeight()){
+				g2D.drawLine(cameraX, cameraY+i, cameraX+map.getWidth(), cameraY+i);
+				
+			}
+		}
+		
+		if (FrameMain.getInstance().getPanelMain().getPanelTree().isSelect()){
+			Sprite spriteSelect = FrameMain.getInstance().getPanelMain().getPanelTree().getSpriteSelect();
+			spriteSelect.draw(g2D, getMouseX(), getMouseY(), panelMap.getObjHandler().getDirection());
+		}
 	}
 
 	@Override
@@ -42,13 +61,15 @@ public class Camera implements MouseMotionListener{
 		int mouseX = e.getX();
 		int mouseY = e.getY();
 		
-		cameraX = cameraX+(mouseX-mouseXPre);
-		cameraY = cameraY+(mouseY-mouseYPre);
-		if (cameraX > 0) cameraX = 0;
-		if (cameraY > 0) cameraY = 0;
-			
-		mouseXPre = mouseX;
-		mouseYPre = mouseY;
+		if (e.getModifiers() == InputEvent.BUTTON2_MASK){
+			cameraX = cameraX+(mouseX-mouseXPre);
+			cameraY = cameraY+(mouseY-mouseYPre);
+			if (cameraX > 0) cameraX = 0;
+			if (cameraY > 0) cameraY = 0;
+				
+			mouseXPre = mouseX;
+			mouseYPre = mouseY;
+		}
 		
 		panelMap.repaint();
 	}
@@ -57,6 +78,8 @@ public class Camera implements MouseMotionListener{
 	public void mouseMoved(MouseEvent e) {
 		mouseXPre = e.getX();
 		mouseYPre = e.getY();
+		
+		panelMap.repaint();
 	}
 	
 	public int getCameraX(){
@@ -65,5 +88,13 @@ public class Camera implements MouseMotionListener{
 	
 	public int getCameraY(){
 		return cameraY;
+	}
+	
+	public int getMouseX(){
+		return mouseXPre;
+	}
+	
+	public int getMouseY(){
+		return mouseYPre;
 	}
 }

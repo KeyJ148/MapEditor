@@ -52,14 +52,16 @@ public class Sprite{
     public void draw(Graphics2D g, int x, int y, double direction) {
     	direction = Math.toRadians(direction);
     	direction -= Math.PI/2; //смещена начального угла с ¬остока на —евер
+    	
 		AffineTransform at = new AffineTransform(); 
-		at.rotate(-direction,x+getWidth()/2,y+getHeight()/2); //—оздание трансформа с поворотом
+		at.rotate(-direction,x,y); //—оздание трансформа с поворотом от центра объекта
 		g.setTransform(at); //дл€ поворота спрайта на direction
-        g.drawImage(image, x, y, null);//дл€ отрисовки спрайта нужен верхний левый угол
+		
+        g.drawImage(image, x-getWidth()/2, y-getHeight()/2, null);//дл€ отрисовки спрайта нужен верхний левый угол
         g.setTransform(new AffineTransform());
     }
     
     public void draw(Graphics g, int x, int y) {
-        g.drawImage(image, x, y, null);//дл€ отрисовки спрайта нужен верхний левый угол
+    	g.drawImage(image, x-getWidth()/2, y-getHeight()/2, null);//дл€ отрисовки спрайта нужен верхний левый угол
     }
 }

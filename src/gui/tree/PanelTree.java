@@ -42,4 +42,9 @@ public class PanelTree extends JPanel {
 	public Sprite getSpriteSelect(){
 		return spriteButtonSelect.getSprite();
 	}
+	
+	public boolean isSelect(){
+		if (spriteButtonSelect == null) return false;
+		return true;
+	}
 }

@@ -20,7 +20,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 	private static final long serialVersionUID = 1L;
 	private JMenu menuFile, menuSettings;
 	private JMenuItem itemFileCreate, itemFileOpen, itemFileSave, itemFileSaveAs;
-	private JMenuItem itemSettingsLoadSprite, itemSettingsSetBackground;
+	private JMenuItem itemSettingsLoadSprite, itemSettingsSetBackground, itemSettingsGrid;
 	
 	public MenuBarMain(){
 		//װאיכû
@@ -59,6 +59,11 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 		itemSettingsSetBackground.addActionListener(this);
 		itemSettingsSetBackground.setMnemonic(KeyEvent.VK_B);
 		menuSettings.add(itemSettingsSetBackground);
+		
+		itemSettingsGrid = new JMenuItem("Grid", new ImageIcon("image/grid.png"));
+		itemSettingsGrid.addActionListener(this);
+		itemSettingsGrid.setMnemonic(KeyEvent.VK_G);
+		menuSettings.add(itemSettingsGrid);
 	}
 
 	@Override
@@ -69,6 +74,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 		if (e.getSource().equals(itemFileSaveAs)) actionFileSaveAs();
 		if (e.getSource().equals(itemSettingsLoadSprite)) actionSettingsLoadSprite();
 		if (e.getSource().equals(itemSettingsSetBackground)) actionSettingsSetBackground();
+		if (e.getSource().equals(itemSettingsGrid)) actionSettingsGrid();
 	}
 	
 	//װאיכû
@@ -119,6 +125,10 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 				FrameMain.getInstance().getPanelMain().getPanelMap().repaint();
 			}
 		}
+	}
+	
+	private void actionSettingsGrid(){
+		new DialogGrid(FrameMain.getInstance());
 	}
 
 }
