@@ -18,10 +18,7 @@ public class Map {
 	
 	private Sprite backgroundSprite;
 	
-	private ArrayList<Integer> xArray = new ArrayList<Integer>();
-	private ArrayList<Integer> yArray = new ArrayList<Integer>();
-	private ArrayList<Double> directionArray = new ArrayList<Double>();
-	private ArrayList<Sprite> spriteArray = new ArrayList<Sprite>();
+	private ArrayList<Obj> array = new ArrayList<Obj>();
 	
 	private File dataFile;//Файл, из которого открыли карту
 	
@@ -49,6 +46,8 @@ public class Map {
 			System.out.println("[ERROR] File not found");
 		} catch (IOException e) {
 			System.out.println("[ERROR] IO exception");
+		} catch (NullPointerException e){
+			System.out.println("[ERROR] Sprite not found");
 		}
 	}
 	
@@ -71,7 +70,8 @@ public class Map {
 			writer.write(width + " " + height + " " + backgroundSprite.getName());
 			writer.newLine();
 			for (int i=0; i<getCount(); i++){
-				writer.write(getX(i) + " " + getY(i) + " " + getDirection(i) + " " + getSprite(i).getName());
+				Obj obj = getObj(i);
+				writer.write(obj.x + " " + obj.y + " " + obj.direction + " " + obj.sprite.getName());
 				writer.newLine();
 			}
 			writer.close();
@@ -81,10 +81,7 @@ public class Map {
 	}
 	
 	public void add(int x, int y, double direction, Sprite sprite){
-		xArray.add(x);
-		yArray.add(y);
-		directionArray.add(direction);
-		spriteArray.add(sprite);
+		array.add(new Obj(x, y, direction, sprite));
 	}
 	
 	public void setSize(int width, int height){
@@ -117,29 +114,14 @@ public class Map {
 	}
 	
 	public int getCount(){
-		return xArray.size();
+		return array.size();
 	}
 	
-	public int getX(int index){
-		return xArray.get(index);
-	}
-	
-	public int getY(int index){
-		return yArray.get(index);
-	}
-	
-	public double getDirection(int index){
-		return directionArray.get(index);
-	}
-	
-	public Sprite getSprite(int index){
-		return spriteArray.get(index);
+	public Obj getObj(int index){
+		return array.get(index);
 	}
 	
 	public void remove(int index){
-		xArray.remove(index);
-		yArray.remove(index);
-		directionArray.remove(index);
-		spriteArray.remove(index);
+		array.remove(index);
 	}
 }

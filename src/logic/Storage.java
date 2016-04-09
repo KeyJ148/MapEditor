@@ -42,7 +42,7 @@ public class Storage {
 			if (name.equals(spriteArray.get(i).getPath())) return spriteArray.get(i);
 			if (name.equals(spriteArray.get(i).getName())) return spriteArray.get(i);
 		}
-		return null;
+		throw new NullPointerException();
 	}
 	
 	public static Sprite[] getSprite(){

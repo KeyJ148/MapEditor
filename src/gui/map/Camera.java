@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 import gui.FrameMain;
 import logic.Map;
+import logic.Obj;
 import logic.Sprite;
 
 public class Camera implements MouseMotionListener{
@@ -36,7 +37,8 @@ public class Camera implements MouseMotionListener{
 			
 			
 		for (int i=0; i<map.getCount(); i++){
-			map.getSprite(i).draw(g2D, cameraX+map.getX(i), cameraY+map.getY(i), map.getDirection(i));
+			Obj obj = map.getObj(i);
+			obj.sprite.draw(g2D, cameraX+obj.x, cameraY+obj.y, obj.direction);
 		}
 		
 		if (panelMap.getGrid().getActive()){

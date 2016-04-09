@@ -8,6 +8,7 @@ import java.awt.event.MouseWheelListener;
 
 import gui.FrameMain;
 import logic.Map;
+import logic.Obj;
 import logic.Sprite;
 
 public class ObjectHandler implements MouseListener, MouseWheelListener {
@@ -62,10 +63,11 @@ public class ObjectHandler implements MouseListener, MouseWheelListener {
 		}
 		
 		for (int i=map.getCount()-1; i>=0; i--){//Обратный цикл для того чтобы вначале удалялись объекты расположенные сверху
-			if ((absoluteX >= map.getX(i)-map.getSprite(i).getWidth()/2) &&
-				(absoluteY >= map.getY(i)-map.getSprite(i).getHeight()/2) &&
-				(absoluteX <= map.getX(i)+map.getSprite(i).getWidth()/2) &&
-				(absoluteY <= map.getY(i)+map.getSprite(i).getHeight()/2)){
+			Obj obj = map.getObj(i);
+			if ((absoluteX >= obj.x-obj.sprite.getWidth()/2) &&
+				(absoluteY >= obj.y-obj.sprite.getHeight()/2) &&
+				(absoluteX <= obj.x+obj.sprite.getWidth()/2) &&
+				(absoluteY <= obj.y+obj.sprite.getHeight()/2)){
 				
 				map.remove(i);
 				panelMap.repaint();
