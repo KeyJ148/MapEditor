@@ -8,9 +8,15 @@ public class MapEditor {
 
     public static void main(String[] args) {
         FrameMain.getInstance();
+        MapEditor.loadDefaultSprites();
+    }
 
-        Storage.loadSprites(new File("./res/image/"));
-        FrameMain.getInstance().getPanelMain().getPanelTree().addSprite(Storage.getSprite());
+    public static void loadDefaultSprites(){
+        File f = new File("./res/image/");
+        if (f.exists()){
+            Storage.loadSprites(f);
+            FrameMain.getInstance().getPanelMain().getPanelTree().addSprite(Storage.getSprite());
+        }
     }
 
 }
