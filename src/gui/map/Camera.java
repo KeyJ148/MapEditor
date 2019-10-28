@@ -43,12 +43,11 @@ public class Camera implements MouseMotionListener{
 
         if (panelMap.getGrid().getActive()){
             g2D.setColor(Color.BLACK);
-            for (int i=0; i<map.getWidth(); i+=panelMap.getGrid().getWidth()){
+            for (int i=-panelMap.getGrid().getIndentWidth(); i<map.getWidth(); i+=panelMap.getGrid().getWidth()){
                 g2D.drawLine(cameraX+i, cameraY, cameraX+i, cameraY+map.getHeight());
             }
-            for (int i=0; i<map.getHeight(); i+=panelMap.getGrid().getHeight()){
+            for (int i=-panelMap.getGrid().getIndentHeight(); i<map.getHeight(); i+=panelMap.getGrid().getHeight()){
                 g2D.drawLine(cameraX, cameraY+i, cameraX+map.getWidth(), cameraY+i);
-
             }
         }
 
