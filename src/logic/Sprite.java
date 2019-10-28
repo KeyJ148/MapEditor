@@ -18,7 +18,7 @@ public class Sprite{
     
     public Sprite(File f) {
     	path = f.getName();
-		//Загрузка изображения
+
 		BufferedImage sourceImage = null;
         try {
 			sourceImage = ImageIO.read(f);
@@ -51,17 +51,17 @@ public class Sprite{
     
     public void draw(Graphics2D g, int x, int y, double direction) {
     	direction = Math.toRadians(direction);
-    	direction -= Math.PI/2; //смещена начального угла с Востока на Север
+    	direction -= Math.PI/2;
     	
 		AffineTransform at = new AffineTransform(); 
-		at.rotate(-direction,x,y); //Создание трансформа с поворотом от центра объекта
-		g.setTransform(at); //для поворота спрайта на direction
+		at.rotate(-direction,x,y);
+		g.setTransform(at);
 		
-        g.drawImage(image, x-getWidth()/2, y-getHeight()/2, null);//для отрисовки спрайта нужен верхний левый угол
+        g.drawImage(image, x-getWidth()/2, y-getHeight()/2, null);
         g.setTransform(new AffineTransform());
     }
     
     public void draw(Graphics g, int x, int y) {
-    	g.drawImage(image, x-getWidth()/2, y-getHeight()/2, null);//для отрисовки спрайта нужен верхний левый угол
+    	g.drawImage(image, x-getWidth()/2, y-getHeight()/2, null);
     }
 }
