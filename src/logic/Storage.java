@@ -4,51 +4,51 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class Storage {
-	
-	private static ArrayList<Sprite> spriteArray = new ArrayList<Sprite>();
-	
-	public static void add(File f){
-		String name = f.getName().substring(0, f.getName().lastIndexOf('.'));
-		String type = f.getName().substring(f.getName().lastIndexOf('.')+1);
-		if (type.equals("png")){
-			boolean haveName = false;
-			for (int i=0; i<spriteArray.size(); i++){
-				if (name.equals(spriteArray.get(i).getPath())){
-					haveName = true;
-					break;
-				}
-			}
-			
-			if (!haveName){
-				spriteArray.add(new Sprite(f));
-			}
-		}
-	}
-	
-	public static void loadSprites(File f){
-		File[] files = f.listFiles();
-		for (int i=0; i<files.length; i++){
-			if (files[i].isDirectory()){
-				loadSprites(files[i]);
-			} else {
-				add(files[i]);
-			}
-		}
-	}
-	
-	//Ïîëó÷åíèå ññûëêè íà ñïðàéò èç ñòðîêè
-	public static Sprite getSprite(String name){
-		for (int i=0; i<spriteArray.size(); i++){
-			if (name.equals(spriteArray.get(i).getPath())) return spriteArray.get(i);
-			if (name.equals(spriteArray.get(i).getName())) return spriteArray.get(i);
-		}
-		throw new NullPointerException();
-	}
-	
-	public static Sprite[] getSprite(){
-		Sprite[] sprites = new Sprite[spriteArray.size()];
-		for (int i=0; i<spriteArray.size(); i++) 
-			sprites[i] = spriteArray.get(i);
-		return sprites;
-	}
+
+    private static ArrayList<Sprite> spriteArray = new ArrayList<Sprite>();
+
+    public static void add(File f){
+        String name = f.getName().substring(0, f.getName().lastIndexOf('.'));
+        String type = f.getName().substring(f.getName().lastIndexOf('.')+1);
+        if (type.equals("png")){
+            boolean haveName = false;
+            for (int i=0; i<spriteArray.size(); i++){
+                if (name.equals(spriteArray.get(i).getPath())){
+                    haveName = true;
+                    break;
+                }
+            }
+
+            if (!haveName){
+                spriteArray.add(new Sprite(f));
+            }
+        }
+    }
+
+    public static void loadSprites(File f){
+        File[] files = f.listFiles();
+        for (int i=0; i<files.length; i++){
+            if (files[i].isDirectory()){
+                loadSprites(files[i]);
+            } else {
+                add(files[i]);
+            }
+        }
+    }
+
+    //ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ ÑÑÑ‹Ð»ÐºÐ¸ Ð½Ð° ÑÐ¿Ñ€Ð°Ð¹Ñ‚ Ð¸Ð· ÑÑ‚Ñ€Ð¾ÐºÐ¸
+    public static Sprite getSprite(String name){
+        for (int i=0; i<spriteArray.size(); i++){
+            if (name.equals(spriteArray.get(i).getPath())) return spriteArray.get(i);
+            if (name.equals(spriteArray.get(i).getName())) return spriteArray.get(i);
+        }
+        throw new NullPointerException();
+    }
+
+    public static Sprite[] getSprite(){
+        Sprite[] sprites = new Sprite[spriteArray.size()];
+        for (int i=0; i<spriteArray.size(); i++)
+            sprites[i] = spriteArray.get(i);
+        return sprites;
+    }
 }
