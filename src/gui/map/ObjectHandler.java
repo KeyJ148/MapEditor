@@ -15,7 +15,7 @@ public class ObjectHandler implements MouseListener, MouseWheelListener {
 
     private PanelMap panelMap;
     private double direction = 90;//Угол, с которым будет установлен объект
-    private static final double DIRECTION_UP = (double) 360/16;//На сколько градусов поворачивать за один скролл
+    public static double DIRECTION_UP = (double) 360/16;//На сколько градусов поворачивать за один скролл
 
     public ObjectHandler(PanelMap panelMap){
         this.panelMap = panelMap;

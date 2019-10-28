@@ -20,7 +20,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
     private static final long serialVersionUID = 1L;
     private JMenu menuFile, menuSettings;
     private JMenuItem itemFileCreate, itemFileOpen, itemFileSave, itemFileSaveAs;
-    private JMenuItem itemSettingsLoadSprite, itemSettingsSetBackground, itemSettingsGrid;
+    private JMenuItem itemSettingsLoadSprite, itemSettingsSetBackground, itemSettingsGrid, itemSettingsRotate;
 
     public MenuBarMain(){
 
@@ -64,6 +64,11 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
         itemSettingsGrid.addActionListener(this);
         itemSettingsGrid.setMnemonic(KeyEvent.VK_G);
         menuSettings.add(itemSettingsGrid);
+
+        itemSettingsRotate = new JMenuItem("Rotate", new ImageIcon("image/rotate.png"));
+        itemSettingsRotate.addActionListener(this);
+        itemSettingsRotate.setMnemonic(KeyEvent.VK_R);
+        menuSettings.add(itemSettingsRotate);
     }
 
     @Override
@@ -75,6 +80,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
         if (e.getSource().equals(itemSettingsLoadSprite)) actionSettingsLoadSprite();
         if (e.getSource().equals(itemSettingsSetBackground)) actionSettingsSetBackground();
         if (e.getSource().equals(itemSettingsGrid)) actionSettingsGrid();
+        if (e.getSource().equals(itemSettingsRotate)) actionSettingsRotate();
     }
 
 
@@ -135,4 +141,7 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
         new DialogGrid(FrameMain.getInstance());
     }
 
+    private void actionSettingsRotate(){
+        new DialogDirectionStep(FrameMain.getInstance());
+    }
 }
