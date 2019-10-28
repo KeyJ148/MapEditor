@@ -83,15 +83,17 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
     }
 
     public void actionFileOpen(){
+        String standartPath = (new File("./res/map/").exists())? "./res/map/" : ".";
+
         JFileChooser fileOpen = new JFileChooser();
-        fileOpen.setCurrentDirectory(new File("."));
+        fileOpen.setCurrentDirectory(new File(standartPath));
         if (fileOpen.showOpenDialog(FrameMain.getInstance()) == JFileChooser.APPROVE_OPTION){
             File file = fileOpen.getSelectedFile();
             new Map(file);
         }
     }
 
-    private void actionFileSave(){//�� ��������
+    private void actionFileSave(){
         FrameMain.getInstance().getPanelMain().getPanelMap().getMap().save();
     }
 
@@ -105,8 +107,10 @@ public class MenuBarMain extends JMenuBar implements ActionListener{
 
 
     private void actionSettingsLoadSprite(){
+        String standartPath = (new File("./res/image/").exists())? "./res/image/" : ".";
+
         JFileChooser fileOpen = new JFileChooser();
-        fileOpen.setCurrentDirectory(new File("."));
+        fileOpen.setCurrentDirectory(new File(standartPath));
         fileOpen.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (fileOpen.showOpenDialog(FrameMain.getInstance()) == JFileChooser.APPROVE_OPTION){
             File file = fileOpen.getSelectedFile();
