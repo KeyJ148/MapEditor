@@ -71,7 +71,8 @@ public class Map {
             writer.newLine();
             for (int i=0; i<getCount(); i++){
                 Obj obj = getObj(i);
-                writer.write(obj.x + " " + obj.y + " " + (int) obj.direction + " " + obj.sprite.getName());
+                int dir = (int) obj.direction; dir = (dir%360 + 360)%360; //+360 необходимо для отрицательного dir
+                writer.write(obj.x + " " + obj.y + " " + dir + " " + obj.sprite.getName());
                 writer.newLine();
             }
             writer.close();
